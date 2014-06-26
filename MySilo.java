@@ -21,10 +21,14 @@ public class MySilo extends Silo implements Subject, Observer
     
     
     private void setRandomPosition() {
-        // TODO A4 mittels Random zufällige x und y Position (Variable randx,randy) mittels Random ermitteln
+        // TODO A4 mittels Random zufÃ¤llige x und y Position (Variable randx,randy) mittels Random ermitteln
         // BEGIN
-       
-        
+
+        Random randomgenerator = new Random();
+
+        int randx = randomgenerator.nextInt(450);
+        int randy = randomgenerator.nextInt(450);
+
         // TODO END
         this.meinePosition = new Punkt(randx,randy);
         this.setDurchmesser(40);
@@ -36,36 +40,38 @@ public class MySilo extends Silo implements Subject, Observer
     
     public void registerObserver(Observer o) {
         // TODO A3
-        // Observer zur Liste observer hinzufügen. 
-        // Auf Duplikate prüfen 
-         
+        // Observer zur Liste observer hinzufÃ¼gen. 
+        // Auf Duplikate prÃ¼fen
+        if (!observer.contains(o)) {
+            observer.add(o);   
+        }
     }    
     
     public void removeObserver(Observer o) {
         // TODO A3 
         // Observer aus Liste observer entfernen 
-        
+        observer.remove(o);
     }    
     
     public void sendPosition() {
        
         for(Observer o : observer) {
-          // TODO A3
-          // Alle Observer in der Liste informieren (Aufruf der update Methode)
-         
+            // TODO A3
+            // Alle Observer in der Liste informieren (Aufruf der update Methode)
+            o.update(this);
         }    
     }     
     
-    // Prüfen ob Silo Kollission mit einem anderen Silo hat
+    // PrÃ¼fen ob Silo Kollission mit einem anderen Silo hat
     public void update(MySilo s) {
-        // System.out.println("Kollision prüfen"); 
+        // System.out.println("Kollision prÃ¼fen"); 
         if(checkCollision(s)) {
             System.out.println("Kollision dieses Silos mit einem anderen Silo");
             try {
                 Thread.sleep(3000);
             } catch(Exception e) { }    
             // setVisible(false);
-            System.out.println("Neue Position setzen und observer über neue Position informieren (erneute Kollisionsprüfung)");
+            System.out.println("Neue Position setzen und observer Ã¼ber neue Position informieren (erneute KollisionsprÃ¼fung)");
             setRandomPosition();
             sendPosition();
             
@@ -81,9 +87,11 @@ public class MySilo extends Silo implements Subject, Observer
         double radius2 = s.getDurchmesser()/2;
         double distanz = Math.sqrt(Math.pow(this.meinePosition.getX()-s.getPosition().getX(),2)+Math.pow(this.meinePosition.getY()-s.getPosition().getY(),2));
         // TODO A5 BEGIN
-        // Wenn die Distanz kleiner ist als die Summe der beiden Radien soll true zurückgegeben 
+        // Wenn die Distanz kleiner ist als die Summe der beiden Radien soll true zurÃ¼ckgegeben 
         // werden
-        
+        if (distanz < radius1+radius2) {
+            return true;
+        }
         // TODO A5 END
         return false;
         
