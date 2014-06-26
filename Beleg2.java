@@ -1,4 +1,4 @@
-package Beleg2_SS2014;
+ 
 import Baustelle.physical.*;
 // TODO import anpassen
 import Baustelle.*;
@@ -54,7 +54,7 @@ public class Beleg2 {
     // Array silos mit den erzeugten Silos befüllen und zurückgeben
     // TODO A1 BEGIN
     for(int i = 0; i < anzahl; i++) {
-      silos[i] = new MySilo();
+       silos[i] = new MySilo();
     }
 
     // TODO A1 END
