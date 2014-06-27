@@ -1,6 +1,5 @@
 package Beleg2_SS2014;
 import Baustelle.physical.*;
-import java.util.Random;
 import java.util.*;
 
 public class MySilo extends Silo implements Subject, Observer
@@ -17,8 +16,27 @@ public class MySilo extends Silo implements Subject, Observer
     
     public Punkt getPosition() {
         return meinePosition;    
-    }    
-    
+    } 
+
+    /*
+     * Helperfunction
+     * Calculates the difference to the border of the field
+     */
+    private int differenceBorder(int value) {
+        int diff = 0;
+
+        if(value >= 0 && value <= 20) {
+            diff = 20 - value;
+            value = value + diff;
+        }
+
+        if(value >= 430 && value <= 450) {
+            diff = 450 - value;
+            value = value - diff;
+        }
+
+        return value;
+    }
     
     private void setRandomPosition() {
         // TODO A4 mittels Random zufällige x und y Position (Variable randx,randy) mittels Random ermitteln
@@ -28,6 +46,8 @@ public class MySilo extends Silo implements Subject, Observer
 
         int randx = randomgenerator.nextInt(450);
         int randy = randomgenerator.nextInt(450);
+        randx = differenceBorder(randx);
+        randy = differenceBorder(randy);
 
         // TODO END
         this.meinePosition = new Punkt(randx,randy);
@@ -69,9 +89,10 @@ public class MySilo extends Silo implements Subject, Observer
             System.out.println("Kollision dieses Silos mit einem anderen Silo");
             try {
                 Thread.sleep(3000);
-            } catch(Exception e) { }    
+            }
+            catch(Exception e) { }    
             // setVisible(false);
-            System.out.println("Neue Position setzen und observer über neue Position informieren (erneute Kollisionsprüfung)");
+            System.out.println("Neue Position setzen und observer ueber neue Position informieren (erneute Kollisionspruefung)");
             setRandomPosition();
             sendPosition();
             
