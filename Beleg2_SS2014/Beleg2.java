@@ -9,7 +9,7 @@ import Baustelle.graphical.*;
 public class Beleg2 {
 
   // TODO A0 Bearbeiter anpassen; Matrikelnummer der Bearbeiter eintragen!
-  public static String bearbeiter = "xxxxxxx und xxxxxxx";
+  public static String bearbeiter = "3863732 und 3628026";
   // TODO A0 ENDE
 
   public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class Beleg2 {
 
   private static MySilo[] createSilos(int anzahl) {
     MySilo[] silos = new MySilo[anzahl];
-    // Array silos mit den erzeugten Silos befüllen und zurückgeben
+    // Array silos mit den erzeugten Silos befÃ¼llen und zurÃ¼ckgeben
     // TODO A1 BEGIN
     for(int i = 0; i < anzahl; i++) {
       silos[i] = new MySilo();
